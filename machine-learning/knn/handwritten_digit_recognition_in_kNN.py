@@ -3,12 +3,11 @@ from os import listdir
 import operator
 import time
 
-# img2vector ·½·¨
-# ²ÎÊı£ºÎÄ¼şÃû
-# ·µ»Ø£ºnumpy Êı×é
-# ¹¦ÄÜ£º½« 32x32 µÄ¶ş½øÖÆÍ¼Ïñ¾ØÕó×ª»»Îª 1x1024 µÄÏòÁ¿
 
-
+# img2vector æ–¹æ³•
+# å‚æ•°ï¼šæ–‡ä»¶å
+# è¿”å›ï¼šnumpy æ•°ç»„
+# åŠŸèƒ½ï¼šå°† 32x32 çš„äºŒè¿›åˆ¶å›¾åƒçŸ©é˜µè½¬æ¢ä¸º 1x1024 çš„å‘é‡
 def img2vector(file):
     returnVec = np.zeros((1, 1024))
     with open(file) as fr:
@@ -18,18 +17,18 @@ def img2vector(file):
                 returnVec[0, 32*i+j] = int(lineStr[j])
     return  returnVec
 	
-# classify ·ÖÀà·½·¨
-# ¹¦ÄÜ£º¶Ô´ı²âÊı¾İ½øĞĞ·ÖÀà
-# ²ÎÊı£º
-#    inX£º´ı·ÖÀàÊı¾İ
-#    dataSet£ºÑµÁ·Êı¾İ¼¯
-#    labels£º±êÇ©ÏòÁ¿
-#    k£º½üÁÚÊıÁ¿
-# ·µ»Ø£ºÀà±êÇ©
+# classify åˆ†ç±»æ–¹æ³•
+# åŠŸèƒ½ï¼šå¯¹å¾…æµ‹æ•°æ®è¿›è¡Œåˆ†ç±»
+# å‚æ•°ï¼š
+#    inXï¼šå¾…åˆ†ç±»æ•°æ®
+#    dataSetï¼šè®­ç»ƒæ•°æ®é›†
+#    labelsï¼šæ ‡ç­¾å‘é‡
+#    kï¼šè¿‘é‚»æ•°é‡
+# è¿”å›ï¼šç±»æ ‡ç­¾
 
 def classify(inX, dataSet, labels, k=3):
     dataSetSize = dataSet.shape[0]
-    diffMat = np.tile(inX, (dataSetSize,1)) - dataSet   # tile(A,n) -- ½«Êı¾İ×é A ÖØ¸´n´Î 
+    diffMat = np.tile(inX, (dataSetSize,1)) - dataSet   # tile(A,n) -- å°†æ•°æ®ç»„ A é‡å¤næ¬¡ 
     sqDiffMat = np.power(diffMat, 2)
     sqDistance = sqDiffMat.sum(axis=1)
     distance = np.sqrt(sqDistance)
@@ -42,7 +41,7 @@ def classify(inX, dataSet, labels, k=3):
     return sortedClassCount[0][0]
 	
 
-# ¶ÁÈ¡Í¼ÏñÊı¾İÎÄ¼ş²¢×ª»»³É¾ØÕó
+# è¯»å–å›¾åƒæ•°æ®æ–‡ä»¶å¹¶è½¬æ¢æˆçŸ©é˜µ
 def read_and_convert(filePath):
     dataLabel = []
     fileList = listdir(filePath)
@@ -56,7 +55,7 @@ def read_and_convert(filePath):
     return dataMat, dataLabel
 
 	
-# ÊÖĞ´Êı×ÖÊ¶±ğ
+# æ‰‹å†™æ•°å­—è¯†åˆ«
 def handwrittingClassify():
     hwlabels = []
     trainFilePath = "trainingDigits"
