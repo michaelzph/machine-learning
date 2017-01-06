@@ -1,1 +1,1 @@
-knn
+用kNN进行Minist-image数字手写识别
